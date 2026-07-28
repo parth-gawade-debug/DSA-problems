@@ -5,6 +5,7 @@ struct employee {
     int emp_id;
     char emp_name[20];
     int salary;
+    int increment;
 };
 
 
@@ -12,6 +13,7 @@ void accept(struct employee emp1[], int n);
 void display(struct employee emp1[], int n);
 void bubble_sort(struct employee emp1[], int n); 
 void selection_sort(struct employee emp1[], int n);
+void insertion_sort(struct employee emp1[], int n);
 
 int main() {
     int n;
@@ -34,6 +36,10 @@ int main() {
     printf("\n--- Employee Details Sorted by id ---\n");
     display(emp,n);
 
+    insertion_sort(emp, n);
+    printf("\n--- Employee Details Sorted by increment ---\n");
+    display(emp,n);
+
     return 0;
 }
 
@@ -47,13 +53,15 @@ void accept(struct employee emp1[], int n) {
         scanf("%s", emp1[i].emp_name);
         printf("Salary: ");
         scanf("%d", &emp1[i].salary);
+        printf("increment: ");
+        scanf("%d",&emp1[i].increment);
     }
 }
 
 
 void display(struct employee emp1[], int n) {
     for(int i = 0; i < n; i++) {
-        printf("Employee ID: %d | Name: %s | Salary: %d\n", emp1[i].emp_id, emp1[i].emp_name, emp1[i].salary);
+        printf("Employee ID: %d | Name: %s | Salary: %d | increment: %d\n", emp1[i].emp_id, emp1[i].emp_name, emp1[i].salary,emp1[i].increment);
     }
 } 
 
@@ -89,5 +97,17 @@ void selection_sort(struct employee emp1[], int n) {
         }
     }
 }
-
+void insertion_sort(struct employee emp1[],int n ) {
+    int i,j;
+    struct employee key;
+    for (i=1;i<n;i++){
+        key=emp1[i];
+        j=i-1;
+        while (j>=0 && emp1[j].increment>key.increment) {
+            emp1[j+1]=emp1[j];
+            j--;
+        }
+        emp1[j+1]=key;
+    }
+}
  
