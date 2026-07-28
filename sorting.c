@@ -14,6 +14,7 @@ void display(struct employee emp1[], int n);
 void bubble_sort(struct employee emp1[], int n); 
 void selection_sort(struct employee emp1[], int n);
 void insertion_sort(struct employee emp1[], int n);
+void linear_search(struct employee emp1[], int n, int target);
 
 int main() {
     int n;
@@ -39,6 +40,9 @@ int main() {
     insertion_sort(emp, n);
     printf("\n--- Employee Details Sorted by increment ---\n");
     display(emp,n);
+
+    linear_search(emp, n,3);
+    
 
     return 0;
 }
@@ -108,6 +112,18 @@ void insertion_sort(struct employee emp1[],int n ) {
             j--;
         }
         emp1[j+1]=key;
+    }
+}
+void linear_search(struct employee emp1[], int n, int target)
+{int i;
+    for (int i = 0; i < n; i++) {
+        if (emp1[i].emp_id == target){
+            printf("Target Data Found!!\n");
+            break;
+        }
+    }
+    if(i>=n){
+        printf("Target Data Not Found!!\n");
     }
 }
  
