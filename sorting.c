@@ -15,6 +15,7 @@ void bubble_sort(struct employee emp1[], int n);
 void selection_sort(struct employee emp1[], int n);
 void insertion_sort(struct employee emp1[], int n);
 void linear_search(struct employee emp1[], int n, int target);
+void binary_search(struct employee emp1[], int n);
 
 int main() {
     int n;
@@ -42,7 +43,7 @@ int main() {
     display(emp,n);
 
     linear_search(emp, n,3);
-    
+    binary_search(emp, n);
 
     return 0;
 }
@@ -116,7 +117,7 @@ void insertion_sort(struct employee emp1[],int n ) {
 }
 void linear_search(struct employee emp1[], int n, int target)
 {int i;
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         if (emp1[i].emp_id == target){
             printf("Target Data Found!!\n");
             break;
@@ -126,4 +127,21 @@ void linear_search(struct employee emp1[], int n, int target)
         printf("Target Data Not Found!!\n");
     }
 }
- 
+void binary_search(struct employee emp1[], int n) {
+    int key, low = 0, high = n - 1, mid;
+    printf("Enter the employee id to search: ");
+    scanf("%d", &key);
+
+    while (low <= high) {
+        mid = (low + high) / 2;
+        if (key == emp1[mid].emp_id) {
+            printf("Employee id found at index %d\n", mid);
+            return;
+        } else if (key > emp1[mid].emp_id) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    printf("Employee id not found\n");
+}
