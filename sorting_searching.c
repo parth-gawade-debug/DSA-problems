@@ -26,9 +26,63 @@ int main() {
     struct employee emp[n];
 
     accept(emp, n);
+    int choice;
+    int running = 1;
     
-    printf("\n--- Original Employee Details ---\n");
-    display(emp, n);
+     while (running) {
+        printf("\n===== MENU =====\n");
+        printf("1. Display Employee Details\n");
+        printf("2. Bubble Sort (by Salary)\n");
+        printf("3. Selection Sort (by ID)\n");
+        printf("4. Insertion Sort (by Increment)\n");
+        printf("5. Linear Search (by ID)\n");
+        printf("6. Binary Search (by ID)\n");
+        printf("7. Shell Sort (by ID)\n");
+        printf("8. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+    switch(choice) {
+        case 1:
+            printf("\n--- Original Employee Details ---\n");
+            display(emp, n);
+            break;
+        case 2:
+            bubble_sort(emp, n);
+            printf("\n--- Employee Details Sorted by Salary ---\n");
+            display(emp, n);
+            break;
+        case 3:
+            selection_sort(emp, n);
+            printf("\n--- Employee Details Sorted by ID ---\n");
+            display(emp, n);
+            break;
+        case 4:
+            insertion_sort(emp, n);
+            printf("\n--- Employee Details Sorted by Increment ---\n");
+            display(emp, n);
+            break;
+        case 5:
+            int target;
+            printf("Enter employee ID to search: ");
+            scanf("%d", &target);
+            linear_search(emp, n, target);
+            break;
+        case 6:
+            binary_search(emp, n);
+            break;
+        case 7:
+            shell_sort(emp, n);
+            printf("\n--- Employee Details Sorted by Shell Sort (emp_id) ---\n");
+            display(emp, n);
+            break;
+        case 8:
+            running = 0;
+            break;
+        default:
+            printf("Invalid choice. Please try again.\n");
+    }
+}
 
     bubble_sort(emp, n);
 
