@@ -16,6 +16,7 @@ void selection_sort(struct employee emp1[], int n);
 void insertion_sort(struct employee emp1[], int n);
 void linear_search(struct employee emp1[], int n, int target);
 void binary_search(struct employee emp1[], int n);
+void shell_sort(struct employee emp1[], int n);
 
 int main() {
     int n;
@@ -44,6 +45,10 @@ int main() {
 
     linear_search(emp, n,3);
     binary_search(emp, n);
+
+    shell_sort(emp, n);
+    printf("\n--- Employee Details Sorted by Shell Sort(emp_id) ---\n");
+    display(emp,n);
 
     return 0;
 }
@@ -144,4 +149,28 @@ void binary_search(struct employee emp1[], int n) {
         }
     }
     printf("Employee id not found\n");
+}
+void shell_sort(struct employee emp1[],int n){
+    int gap,i,j;
+    gap=n/2;
+    int swapped;
+    struct employee temp;
+    do{
+        swapped=0;
+        do{
+            for(i=0;i<n-gap;i++){
+                if(emp1[i].emp_id>emp1[i+gap].emp_id){
+                    temp=emp1[i];
+                    emp1[i]=emp1[i+gap];
+                    emp1[i+gap]=temp;
+                    swapped=1;
+                }
+            }
+
+        }
+        while(swapped==1);
+        gap=gap/2;
+        
+    }
+    while(gap>0);
 }
