@@ -83,30 +83,8 @@ int main() {
             printf("Invalid choice. Please try again.\n");
     }
 }
-
-    bubble_sort(emp, n);
-
-    printf("\n--- Employee Details Sorted by Salary ---\n");
-    display(emp, n); 
-    
-    selection_sort(emp, n);
-    printf("\n--- Employee Details Sorted by id ---\n");
-    display(emp,n);
-
-    insertion_sort(emp, n);
-    printf("\n--- Employee Details Sorted by increment ---\n");
-    display(emp,n);
-
-    linear_search(emp, n,3);
-    binary_search(emp, n);
-
-    shell_sort(emp, n);
-    printf("\n--- Employee Details Sorted by Shell Sort(emp_id) ---\n");
-    display(emp,n);
-
     return 0;
 }
-
 
 void accept(struct employee emp1[], int n) {
     for (int i = 0; i < n; i++) {
