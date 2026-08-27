@@ -19,6 +19,9 @@ void binary_search(struct employee emp1[], int n);
 void shell_sort(struct employee emp1[], int n);
 int partition(struct employee emp1[], int low, int high);
 void quick_sort(struct employee emp1[], int low, int high);
+void combine(struct employee emp1[], int low, int mid, int high);
+void merge_sort(struct employee emp1[], int low, int high);
+void bucket_sort(struct employee emp1[], int n);
 
 int main() {
     int n;
@@ -41,7 +44,9 @@ int main() {
         printf("6. Binary Search (by ID)\n");
         printf("7. Shell Sort (by ID)\n");
         printf("8. Quick Sort (by ID)\n");
-        printf("9. Exit\n");
+        printf("9. Merge sort by salary\n");
+        printf("10. Bucket Sort (by ID)\n");
+        printf("11. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -85,6 +90,16 @@ int main() {
             display(emp, n);
             break;
         case 9:
+            merge_sort(emp, 0, n - 1);
+            printf("\n--- Employee Details Sorted by Merge Sort (salary) ---\n");
+            display(emp, n);
+            break;
+        case 10:
+            bucket_sort(emp, n);
+            printf("\n--- Employee Details Sorted by Bucket Sort (emp_id) ---\n");
+            display(emp, n);
+            break;
+        case 11:
             running = 0;
             break;
         default:
@@ -244,4 +259,47 @@ void quick_sort(struct employee emp1[], int low, int high) {
         quick_sort(emp1, low, j - 1);
         quick_sort(emp1, j + 1, high);
     }
+}
+void combine(struct employee emp1[],int low , int mid ,int high){
+    int i=low;
+    int j=mid+1;
+    int temp[20];
+    int k;
+    while(i<=mid && j<=high){
+        if(emp1[i].salary<emp1[j].salary){
+            temp[k]=emp1[i].salary;
+            i++;
+            k++;
+        }
+        else{
+            temp[k]=emp1[j].salary;
+            j++;
+            k++;
+        }
+    }
+    while(i<=mid){
+        temp[k]=emp1[i].salary;
+        i++;
+        k++;
+    }
+    while(j<=high){
+        temp[k]=emp1[j].salary;
+        j++;
+        k++;
+    }
+    for(i=low;i<=high;i++){
+        emp1[i].salary=temp[i];
+    }
+}
+void merge_sort(struct employee emp1[], int low, int high) {
+    if(low<high){
+        int mid=(low+high)/2;
+        merge_sort(emp1,low,mid);
+        merge_sort(emp1,mid+1,high);
+        combine(emp1,low,mid,high);
+    }
+}
+void bucket_sort(struct employee emp1[],int n){
+    int bucket[10];
+    
 }
