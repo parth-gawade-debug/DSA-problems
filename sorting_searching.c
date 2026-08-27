@@ -17,6 +17,8 @@ void insertion_sort(struct employee emp1[], int n);
 void linear_search(struct employee emp1[], int n, int target);
 void binary_search(struct employee emp1[], int n);
 void shell_sort(struct employee emp1[], int n);
+int partition(struct employee emp1[], int low, int high);
+void quick_sort(struct employee emp1[], int low, int high);
 
 int main() {
     int n;
@@ -38,7 +40,8 @@ int main() {
         printf("5. Linear Search (by ID)\n");
         printf("6. Binary Search (by ID)\n");
         printf("7. Shell Sort (by ID)\n");
-        printf("8. Exit\n");
+        printf("8. Quick Sort (by ID)\n");
+        printf("9. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -77,6 +80,11 @@ int main() {
             display(emp, n);
             break;
         case 8:
+            quick_sort(emp, 0, n - 1);
+            printf("\n--- Employee Details Sorted by Quick Sort (emp_id) ---\n");
+            display(emp, n);
+            break;
+        case 9:
             running = 0;
             break;
         default:
@@ -205,4 +213,35 @@ void shell_sort(struct employee emp1[],int n){
         
     }
     while(gap>0);
+}
+int partition(struct employee emp1[], int low, int high) {
+    int pivot = emp1[low].emp_id;
+    int i = low ;
+    int j = high;
+    while(i<j) {
+        while(emp1[i].emp_id <= pivot && i < high) {
+            i++;
+        }
+        while(emp1[j].emp_id > pivot && j>=low) {
+            j--;
+        }
+        if(i<j) {
+            struct employee temp = emp1[i];
+            emp1[i] = emp1[j];
+            emp1[j] = temp;
+        }
+        if(i>j) {
+            struct employee temp = emp1[low];
+            emp1[low] = emp1[j];
+            emp1[j] = temp;
+        }
+        return j;
+    }
+}
+void quick_sort(struct employee emp1[], int low, int high) {
+    if(low < high) {
+         int j = partition(emp1, low, high);
+        quick_sort(emp1, low, j - 1);
+        quick_sort(emp1, j + 1, high);
+    }
 }
