@@ -301,5 +301,18 @@ void merge_sort(struct employee emp1[], int low, int high) {
 }
 void bucket_sort(struct employee emp1[],int n){
     int bucket[10];
-    
+    int k;
+    for(int i=0;i<10;i++){
+        bucket[i]=0;
+    }
+    for(int i=0;i<10;i++){
+        bucket[emp1[i].emp_id]++;
+    }
+    for(int i=0;i<10;i++){
+        for(int j=0;j<bucket[i];j++){
+            printf("%d ",i);
+            bucket[k] =i;
+            k++;
+        }
+    }
 }
