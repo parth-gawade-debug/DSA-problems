@@ -22,7 +22,7 @@ void quick_sort(struct employee emp1[], int low, int high);
 void combine(struct employee emp1[], int low, int mid, int high);
 void merge_sort(struct employee emp1[], int low, int high);
 void bucket_sort(struct employee emp1[], int n);
-
+void radix_sort(struct employee emp1[], int n);
 int main() {
     int n;
     printf("Enter number of employees: ");
@@ -46,7 +46,8 @@ int main() {
         printf("8. Quick Sort (by ID)\n");
         printf("9. Merge sort by salary\n");
         printf("10. Bucket Sort (by ID)\n");
-        printf("11. Exit\n");
+        printf("11. Radix Sort (by ID)\n");
+        printf("12. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -100,6 +101,11 @@ int main() {
             display(emp, n);
             break;
         case 11:
+            radix_sort(emp, n);
+            printf("\n--- Employee Details Sorted by Radix Sort (emp_id) ---\n");
+            display(emp, n);
+            break;
+        case 12:
             running = 0;
             break;
         default:
@@ -314,5 +320,41 @@ void bucket_sort(struct employee emp1[],int n){
             bucket[k] =i;
             k++;
         }
+    }
+}
+void radix_sort(struct employee emp1[],int n){
+    int bucket[10][10];
+    int bucket_count[10];
+    int max = emp1[0].emp_id;
+    for(int i=1;i<n;i++){
+        if(emp1[i].emp_id>max){
+            max=emp1[i].emp_id;
+        }
+        while(max>0){
+            int digit=max%10;
+            bucket[digit][bucket_count[digit]]=emp1[i].emp_id;
+            bucket_count[digit]++;
+            max/=10;
+        }
+        int div=1;
+        for(int pass =0;pass<bucket_count;pass++){
+            for (int i=0;i<10;i++){
+                bucket_count[i]=0;
+            }
+            for(int i=0;i<n;i++){
+                int digit=(emp1[i].emp_id/div)%10;
+                bucket[digit][bucket_count[digit]]=emp1[i].emp_id;
+                bucket_count[digit]++;
+            }
+            int k=0;
+            for(int i=0;i<10;i++){
+                for(int j=0;j<bucket_count[i];j++){
+                    emp1[k].emp_id=bucket[i][j];
+                    k++;
+                }
+            }
+            div *= 10;
+        }
+
     }
 }
