@@ -25,3 +25,41 @@ void display(struct term p[], int deg) {
         printf("%dx^%d", p[i].coeff, p[i].exp);
     }
 }
+void add_poly(struct term p1[],struct term p2[], struct term sum[],int deg1,int deg2) {
+    int i=deg1;
+    int j=deg2;
+    int k=0;
+    while(i>=0 && j>=0) {
+        if (p1[i].exp == p2[j].exp) {
+            sum[k].coeff = p1[i].coeff + p2[j].coeff;
+            sum[k].exp = p1[i].exp;
+            i--;
+            j--;
+            k++;
+        }
+        else if (p1[i].exp > p2[j].exp) {
+            sum[k].coeff = p1[i].coeff;
+            sum[k].exp = p1[i].exp;
+            i--;
+            k++;
+        }
+        else {
+            sum[k].coeff = p2[j].coeff;
+            sum[k].exp = p2[j].exp;
+            j--;
+            k++;
+        }
+    }
+    while(i>=0) {
+        sum[k].coeff = p1[i].coeff;
+        sum[k].exp = p1[i].exp;
+        i--;
+        k++;
+    }
+    while(j>=0) {
+        sum[k].coeff = p2[j].coeff;
+        sum[k].exp = p2[j].exp;
+        j--;
+        k++;
+    }    
+}
