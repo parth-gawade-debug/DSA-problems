@@ -4,13 +4,25 @@ struct term {
     int exp;
 };
 int main(){
-    struct term p1[10], p2[10], sum[10];
+    struct term p1[10], p2[10], sum[10], product[20];
     int i, j, k;
     int deg1, deg2;
     printf("Enter degree of first polynomial: ");
     scanf("%d", &deg1);
     printf("enter degree of second polynomial: ");
     scanf("%d", &deg2);
+    accept(p1, deg1);
+    accept(p2, deg2);
+    printf("First polynomial: ");
+    display(p1, deg1);
+    printf("\nSecond polynomial: ");
+    display(p2, deg2);
+    add_poly(p1, p2, sum, deg1, deg2);
+    printf("\nSum of polynomials: ");
+    display(sum, deg1>deg2?deg1:deg2);
+    multiply_poly(p1, p2, product, deg1, deg2);
+    printf("\nProduct of polynomials: ");
+    display(product, deg1+deg2);
     return 0;
 }
 void accept(struct term p[], int deg) {
@@ -73,4 +85,27 @@ void poly_eval(struct term p[],int deg) {
     }
     printf("polynomial evaluated at x=%d is %d\n", x, result);
 }
+void multiply_poly(struct term p1[], struct term p2[], struct term product[], int deg1, int deg2) {
+    int i =deg1;
+    int k=0;
+    while(i>=0) {
+        int j=deg2;
+        while(j>=0) {
+            int coeff = p1[i].coeff * p2[j].coeff;
+            int exp = p1[i].exp + p2[j].exp;
 
+            for (int m=0;m<k;m++) {
+                if(exp==product[m].exp) {
+                    product[m].coeff += coeff;
+                    break;
+                }
+                if(m==k-1) {
+                    product[k].coeff = coeff;
+                    product[k].exp = exp;
+                    k++;
+            }
+            j--;
+            }
+        }    
+
+}
