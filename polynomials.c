@@ -63,3 +63,14 @@ void add_poly(struct term p1[],struct term p2[], struct term sum[],int deg1,int 
         k++;
     }    
 }
+void poly_eval(struct term p[],int deg) {
+    int x;
+    printf("Enter value of x: ");
+    scanf("%d", &x);
+    int result = 0;
+    for(int i=0; i<=deg; i++) {
+        result += p[i].coeff * pow(x, p[i].exp);
+    }
+    printf("polynomial evaluated at x=%d is %d\n", x, result);
+}
+
