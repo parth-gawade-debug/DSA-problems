@@ -21,7 +21,7 @@ int main(void)
 {
     char postfix[20];
     printf("Enter a postfix expression: ");
-    scanf("%19s", postfix);
+    scanf("%s", postfix);
     postfixToPrefix(postfix);
     return 0;
 }
