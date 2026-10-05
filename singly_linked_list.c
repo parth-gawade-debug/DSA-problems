@@ -39,7 +39,7 @@ void create_SLL(struct node *head)
     do
     {
         ptr = (struct node *)malloc(sizeof(struct node));
-        printf("Enter PRN \n");
+        printf("Enter PRN :\n");
         scanf("%d", &ptr -> PRN);
         printf("Enter the Name \n");
         scanf("%s", ptr -> name);
@@ -69,11 +69,11 @@ void add_in_btw_position(struct node * head)
 struct node * ptr, *temp;
 int pos;
 ptr=(struct node*)malloc(sizeof(struct node));
-printf("Enter PRN");
+printf("Enter PRN :\n");
 scanf("%d", &ptr -> PRN);
-printf("Enter Name");
+printf("Enter Name :\n");
 scanf("%s", ptr->name);
-printf("Enter position where to add new node");
+printf("Enter position where to add new node :\n");
 scanf("%d",&pos);
 int count=1;
 temp=head;
@@ -90,9 +90,10 @@ void del_any_position(struct node * head)
 struct node * temp, *prev;
 int pos;
 int count=1;
-printf("Enter position of node to be deleted");
+printf("Enter position of node to be deleted\n");
 scanf("%d", &pos);
-temp= head;
+temp= head->next;
+prev=head;
 while (temp != NULL)
 {
 if(pos == count)
