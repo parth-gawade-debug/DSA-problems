@@ -15,6 +15,7 @@ void del_any_position(struct node * head);
 int count_students(struct node *head);
 void reverse(struct node *head);
 void sort_sll(struct node *head);
+void merge_sll(struct node *head1,struct node *head2);
 int main()
 {
     struct node *head;
@@ -32,6 +33,8 @@ int main()
     reverse(head);
     display(head);
     sort_sll(head);
+    display(head);
+    merge_sll(head,head);
     display(head);
 
 }
@@ -161,4 +164,45 @@ void sort_sll(struct node *head){
         }
     }
 }
+}
+void merge_sll(struct node *head1,struct node *head2){
+    struct node *head3, *curr;
+    struct node *temp1,*temp2, *temp3;
+    head3=(struct node*)malloc(sizeof(struct node));
+    if(head1->next->PRN <head2->next->PRN){
+        head3=head1;}
+        else{
+            head3=head2;
+    }
+    temp1=head1->next;
+    temp2=head2->next;
+    temp3=head3;
+    while(temp1!=NULL && temp2!=NULL){
+        if(temp1->PRN <temp2->PRN){
+            curr =(struct node*)malloc(sizeof(struct node));
+            curr->PRN=temp1->PRN;
+            temp2=temp1->next;
+            temp3->next=curr;
+            curr->next=NULL;
+        }
+        else{
+            
+            curr =(struct node*)malloc(sizeof(struct node));
+            curr->PRN=temp2->PRN;
+            temp2=temp2->next;
+            temp3->next=curr;
+            curr->next=NULL;
+            temp3=temp3->next;
+        }
+    }
+    while(temp1!=NULL){
+        curr =(struct node*)malloc(sizeof(struct node));
+        curr->PRN=temp1->PRN;
+        temp1=temp1->next;
+        temp3->next=curr;
+        curr->next=NULL;
+        temp3=temp3->next;
+        
+        
+    }
 }
