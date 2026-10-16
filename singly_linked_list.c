@@ -14,6 +14,7 @@ void add_in_btw_position(struct node * head);
 void del_any_position(struct node * head);
 int count_students(struct node *head);
 void reverse(struct node *head);
+void sort_sll(struct node *head);
 int main()
 {
     struct node *head;
@@ -29,6 +30,8 @@ int main()
     display(head);
     printf("\nNumber of students = %d\n", count_students(head));
     reverse(head);
+    display(head);
+    sort_sll(head);
     display(head);
 
 }
@@ -57,11 +60,11 @@ struct node *temp;
 temp =head -> next;
 while(temp != NULL)
 {
-printf(" [%d ,    ", temp -> PRN);
-printf("%s]  -->   ", temp -> name);
+printf(" [%d  %s]  -->   ", temp -> PRN, temp -> name);
+
 temp = temp -> next;
 }
-printf(" -> NULL\n");
+printf("NULL\n");
 }
 
 void add_in_btw_position(struct node * head)
@@ -136,4 +139,26 @@ void reverse(struct node *head)
     }
     head->next=p;
 }
-
+void sort_sll(struct node *head){
+    
+    int n=count_students(head);
+    struct node *temp1, *curr, *prev;
+    for(int i=0;i<n-1;i++) {
+        prev=head;
+        curr=head->next;
+        for(int j=0;j<n-i-1;j++) {
+            temp1=curr->next;
+            if(curr->PRN > temp1->PRN) {
+                curr->next=temp1->next;
+                prev->next=temp1;
+                temp1->next=curr;
+                prev=curr;
+                curr=curr->next;
+        }
+        else{
+            prev=curr;
+            curr=temp1;
+        }
+    }
+}
+}
